@@ -1,0 +1,38 @@
+Code flow and explanation: 
+(since we only have the BLL and DAL layers, currently the application is not runnable)
+
+The application is split into few layers: Entities, Repositories, Services
+Each having its own responsibility:
+    Entities: 
+        in Entities directory the db entity objects are stored.
+        
+    Repositories:
+        in here the Repository classes are defined, this is the DAL service, any db operation goes through this layer. 
+        
+    Services:
+        Business logic layer. any (business) logical operation should be implemented here.
+        
+        
+Each Service/Repository has an interface and its implementation.
+Each Repository extends BaseRepository which contains the basic CRUD operations, 
+    anything other than that should be implemented declared in the respective interface and repository class.
+    
+Base Entity class contains only the Id property, but if necessary AuditableEntity can also be created containing 
+    Modified"by"/"date", Created"by"/"date" properties
+    
+
+Tests are not complete
+Currently it only contains the base repository testing.
+I am not using any Mocking frameworks (ex. Moq) just because we are not concentrating on that.
+When we start writing the endpoints for this, then in my opinion it would be better to add the necessary tests.
+
+
+Extensibility:
+"The application is as extensible as simple the logic is"
+Explanation: 
+    The implemented architecture is one of the simplest and tight coupled methods.
+    An extension of adding a new Entity and its own CRUD operations would be simple and easy.
+    Anything apart from that might make the code "junky".
+
+As a conclusion, this architecture is as simple as it gets, extending and making this an enterprise application will not work as more complex it gets
+the more its weaknesses will be visible. 
